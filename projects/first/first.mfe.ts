@@ -1,6 +1,6 @@
 import {SharedMfe, SharedMfeModule} from '@angular-mfe/shared';
 import {Component, NgModule} from '@angular/core';
-import { AgGridModule } from 'ag-grid-angular';
+import { AgGridColumn, AgGridModule } from 'ag-grid-angular';
 
 export const id = 'FirstMfeModule';
 
@@ -10,6 +10,7 @@ export const id = 'FirstMfeModule';
     <p>First Angular Micro Frontend</p> 
     <ag-grid-angular
     style="width: 500px; height: 150px;"
+    (onGridReady)="onGridReady($event)"
     class="ag-theme-alpine"
     [rowData]="rowData"
     [columnDefs]="columnDefs">
@@ -20,12 +21,14 @@ export const id = 'FirstMfeModule';
   `
 })
 export class EntryComponent {
-    columnDefs = [
+    columnDefs=  [
         { field: 'make' },
         { field: 'model' },
         { field: 'price' }
     ];
-
+    onGridReady($event){
+      console.log($event)
+    }
     rowData = [
         { make: 'Toyota', model: 'Celica', price: 35000 },
         { make: 'Ford', model: 'Mondeo', price: 32000 },
